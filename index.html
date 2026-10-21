@@ -1,0 +1,615 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WindPower | Wind Energy India</title>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+:root {
+  --green: #087f5b;
+  --dark: #103b35;
+  --light: #eaf8f1;
+  --white: #ffffff;
+  --text: #243b35;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  color: var(--text);
+  background: #f7fbf8;
+  line-height: 1.6;
+}
+
+header {
+  background: var(--dark);
+  color: white;
+  padding: 16px 7%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.logo {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.logo span {
+  color: #72e3b1;
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+nav a:hover {
+  color: #72e3b1;
+}
+
+.hero {
+  min-height: 440px;
+  padding: 80px 7%;
+  display: flex;
+  align-items: center;
+  color: white;
+  background:
+    linear-gradient(90deg, rgba(7,43,37,.92),
+    rgba(7,43,37,.3)),
+    url("https://images.unsplash.com/photo-1466611653911-95081537e5b7?auto=format&fit=crop&w=1800&q=85")
+    center/cover;
+}
+
+.hero-content {
+  max-width: 680px;
+}
+
+.hero h1 {
+  font-size: clamp(36px, 6vw, 58px);
+  line-height: 1.15;
+  margin-bottom: 20px;
+}
+
+.hero p {
+  font-size: 18px;
+  margin-bottom: 25px;
+}
+
+.btn {
+  display: inline-block;
+  background: #72e3b1;
+  color: #103b35;
+  padding: 12px 22px;
+  border-radius: 7px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+section {
+  padding: 65px 7%;
+  scroll-margin-top: 20px;
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.section-title h2 {
+  font-size: 32px;
+  color: var(--dark);
+}
+
+.section-title p {
+  color: #62746d;
+  margin-top: 8px;
+}
+
+.stats, .cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 22px;
+}
+
+.stat, .card {
+  background: white;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 5px 22px #173b3510;
+}
+
+.stat {
+  text-align: center;
+  border-bottom: 4px solid var(--green);
+}
+
+.stat h3 {
+  color: var(--green);
+  font-size: 32px;
+}
+
+.card .icon {
+  font-size: 35px;
+}
+
+.card h3 {
+  margin: 10px 0;
+  color: var(--dark);
+}
+
+.about {
+  background: var(--light);
+}
+
+.about-text {
+  max-width: 850px;
+  margin: auto;
+  font-size: 17px;
+}
+
+.about-text p {
+  margin-bottom: 15px;
+}
+
+.process {
+  background: var(--dark);
+  color: white;
+}
+
+.process .section-title h2 {
+  color: white;
+}
+
+.process .section-title p {
+  color: #d2e6df;
+}
+
+.process .card {
+  color: var(--text);
+  text-align: center;
+}
+
+.chart-box {
+  background: white;
+  padding: 25px;
+  margin-bottom: 28px;
+  border-radius: 12px;
+  box-shadow: 0 5px 22px #173b3510;
+  min-width: 0;
+}
+
+.chart-box h3 {
+  margin-bottom: 20px;
+}
+
+.chart-area {
+  position: relative;
+  height: 340px;
+  width: 100%;
+}
+
+.table-wrap {
+  overflow-x: auto;
+  background: white;
+  border-radius: 10px;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  min-width: 550px;
+}
+
+th, td {
+  padding: 14px;
+  text-align: left;
+  border-bottom: 1px solid #e5eee8;
+}
+
+th {
+  background: var(--dark);
+  color: white;
+}
+
+tr:hover td {
+  background: #eef9f2;
+}
+
+.note {
+  font-size: 13px;
+  color: #64766e;
+  margin-top: 15px;
+}
+
+.conclusion {
+  background: var(--light);
+  text-align: center;
+}
+
+.conclusion p {
+  max-width: 850px;
+  margin: auto;
+}
+
+footer {
+  background: #092b26;
+  color: white;
+  text-align: center;
+  padding: 25px;
+}
+
+footer p {
+  font-size: 14px;
+}
+
+@media (max-width: 600px) {
+  header {
+    justify-content: center;
+  }
+
+  nav {
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .hero {
+    padding: 65px 6%;
+  }
+
+  section {
+    padding: 45px 5%;
+  }
+
+  .chart-area {
+    height: 270px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">Wind<span>Power</span> 🌿</div>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#importance">Importance</a>
+    <a href="#working">Working</a>
+    <a href="#data">2015–2026 Data</a>
+  </nav>
+</header>
+
+<main>
+
+<section class="hero" id="home">
+  <div class="hero-content">
+    <h1>Powering Tomorrow with Wind Energy</h1>
+    <p>
+      Discover how wind turbines turn natural wind into electricity
+      and support a cleaner, more sustainable future for India.
+    </p>
+    <a class="btn" href="#data">Explore Wind Energy Data ↓</a>
+  </div>
+</section>
+
+<section>
+  <div class="section-title">
+    <h2>Wind Energy at a Glance</h2>
+    <p>India's wind power capacity and recent progress</p>
+  </div>
+
+  <div class="stats">
+    <div class="stat">
+      <h3>57.44 GW</h3>
+      <p>Installed capacity, June 2026</p>
+    </div>
+    <div class="stat">
+      <h3>6.06 GW</h3>
+      <p>Added in FY 2025–26</p>
+    </div>
+    <div class="stat">
+      <h3>Renewable</h3>
+      <p>Natural source of energy</p>
+    </div>
+  </div>
+  <p class="note">
+    Capacity figures are approximate and should be verified against
+    the latest official government reports before publication.
+  </p>
+</section>
+
+<section class="about" id="about">
+  <div class="section-title">
+    <h2>What Is Wind Energy?</h2>
+  </div>
+  <div class="about-text">
+    <p>
+      Wind energy is renewable energy obtained from moving air.
+      A traditional windmill uses wind to perform mechanical work,
+      such as pumping water or grinding grain. A modern wind turbine
+      uses a rotor and generator to produce electricity.
+    </p>
+    <p>
+      Wind power is an important part of the transition to cleaner
+      energy. The amount of electricity produced depends on wind
+      speed, turbine design, location, and operating conditions.
+    </p>
+  </div>
+</section>
+
+<section id="importance">
+  <div class="section-title">
+    <h2>Importance of Windmills</h2>
+    <p>Why wind energy matters</p>
+  </div>
+
+  <div class="cards">
+    <div class="card">
+      <div class="icon">🌱</div>
+      <h3>Renewable Energy</h3>
+      <p>Wind is naturally replenished and does not need to be burned as fuel.</p>
+    </div>
+    <div class="card">
+      <div class="icon">🌍</div>
+      <h3>Lower Emissions</h3>
+      <p>Wind power can reduce greenhouse-gas emissions when it replaces fossil fuels.</p>
+    </div>
+    <div class="card">
+      <div class="icon">⚡</div>
+      <h3>Electricity Supply</h3>
+      <p>Wind farms provide another source of electricity for homes and industries.</p>
+    </div>
+    <div class="card">
+      <div class="icon">👷</div>
+      <h3>Employment</h3>
+      <p>Projects support jobs in engineering, manufacturing, construction, and maintenance.</p>
+    </div>
+    <div class="card">
+      <div class="icon">🌾</div>
+      <h3>Rural Development</h3>
+      <p>Wind projects can provide local income and coexist with some farming activities.</p>
+    </div>
+    <div class="card">
+      <div class="icon">🔋</div>
+      <h3>Energy Security</h3>
+      <p>Wind diversifies the energy mix and can reduce reliance on imported fuels.</p>
+    </div>
+  </div>
+</section>
+
+<section class="process" id="working">
+  <div class="section-title">
+    <h2>How Does a Wind Turbine Work?</h2>
+    <p>Four simple steps from wind to electricity</p>
+  </div>
+
+  <div class="cards">
+    <div class="card">
+      <div class="icon">💨</div>
+      <h3>1. Wind</h3>
+      <p>Moving air pushes the turbine blades.</p>
+    </div>
+    <div class="card">
+      <div class="icon">⚙️</div>
+      <h3>2. Rotation</h3>
+      <p>The blades rotate the rotor and drive system.</p>
+    </div>
+    <div class="card">
+      <div class="icon">🔌</div>
+      <h3>3. Generator</h3>
+      <p>The generator converts mechanical energy into electrical energy.</p>
+    </div>
+    <div class="card">
+      <div class="icon">🏠</div>
+      <h3>4. Electricity</h3>
+      <p>Power equipment delivers electricity to the grid.</p>
+    </div>
+  </div>
+</section>
+
+<section id="data">
+  <div class="section-title">
+    <h2>Wind Energy Data: 2015–2026</h2>
+    <p>India's annual additions and cumulative installed capacity</p>
+  </div>
+
+  <div class="chart-box">
+    <h3>Total Installed Capacity (MW)</h3>
+    <div class="chart-area">
+      <canvas id="capacityChart"></canvas>
+    </div>
+  </div>
+
+  <div class="chart-box">
+    <h3>New Capacity Added Each Financial Year (MW)</h3>
+    <div class="chart-area">
+      <canvas id="additionChart"></canvas>
+    </div>
+  </div>
+
+  <div class="chart-box">
+    <h3>Yearly Data Table</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Financial Year</th>
+            <th>New Capacity (MW)</th>
+            <th>Total Capacity (MW)</th>
+          </tr>
+        </thead>
+        <tbody id="dataTable"></tbody>
+      </table>
+    </div>
+    <p class="note">
+      Financial-year figures refer to year-end installed capacity.
+      June 2026 is a separate snapshot, not a full financial year.
+      Figures are approximate; verify against official publications.
+    </p>
+    <button class="btn" onclick="downloadCSV()" style="border:0;cursor:pointer;margin-top:20px">
+      Download Data (CSV)
+    </button>
+  </div>
+</section>
+
+<section class="conclusion">
+  <div class="section-title">
+    <h2>Conclusion</h2>
+  </div>
+  <p>
+    Wind energy is an important renewable energy source for India.
+    Growing wind capacity can help diversify electricity supply,
+    support employment, and reduce emissions. Continued development
+    requires suitable sites, reliable grid connections, and
+    responsible planning for wildlife and local communities.
+  </p>
+</section>
+
+</main>
+
+<footer>
+  <p>WindPower | Educational Website Project</p>
+  <p>Wind Energy Generation and Development in India, 2015–2026</p>
+</footer>
+
+<script>
+const years = [
+  "2015-16", "2016-17", "2017-18", "2018-19",
+  "2019-20", "2020-21", "2021-22", "2022-23",
+  "2023-24", "2024-25", "2025-26"
+];
+
+const additions = [
+  3423, 5502, 1865, 1481, 2118, 1503,
+  1111, 2276, 3253, 4151, 6057
+];
+
+const capacity = [
+  26777, 32280, 34046, 35626, 37744, 39247,
+  40358, 42633, 45887, 50038, 56095
+];
+
+// Populate the data table
+const table = document.getElementById("dataTable");
+
+years.forEach((year, i) => {
+  const row = document.createElement("tr");
+  [year, additions[i].toLocaleString("en-IN"),
+    capacity[i].toLocaleString("en-IN")].forEach(value => {
+      const cell = document.createElement("td");
+      cell.textContent = value;
+      row.appendChild(cell);
+    });
+  table.appendChild(row);
+});
+
+// Chart 1: Installed capacity
+new Chart(document.getElementById("capacityChart"), {
+  type: "line",
+  data: {
+    labels: years,
+    datasets: [{
+      label: "Installed Capacity (MW)",
+      data: capacity,
+      borderColor: "#087f5b",
+      backgroundColor: "rgba(8,127,91,0.12)",
+      fill: true,
+      tension: 0.25,
+      pointRadius: 4
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: true }
+    },
+    scales: {
+      y: {
+        beginAtZero: false,
+        title: { display: true, text: "Capacity (MW)" }
+      },
+      x: {
+        title: { display: true, text: "Financial Year" }
+      }
+    }
+  }
+});
+
+// Chart 2: Annual capacity additions
+new Chart(document.getElementById("additionChart"), {
+  type: "bar",
+  data: {
+    labels: years,
+    datasets: [{
+      label: "New Capacity (MW)",
+      data: additions,
+      backgroundColor: "#26a779",
+      borderRadius: 5
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: true }
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+        title: { display: true, text: "New Capacity (MW)" }
+      },
+      x: {
+        title: { display: true, text: "Financial Year" }
+      }
+    }
+  }
+});
+
+// Export the displayed data as CSV
+function downloadCSV() {
+  const rows = [
+    ["Financial Year", "New Capacity (MW)", "Total Capacity (MW)"],
+    ...years.map((year, i) => [year, additions[i], capacity[i]])
+  ];
+
+  const csv = rows.map(row =>
+    row.map(value => `"${String(value).replace(/"/g, '""')}"`).join(",")
+  ).join("\n");
+
+  const blob = new Blob([csv], {
+    type: "text/csv;charset=utf-8;"
+  });
+
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "india_wind_energy_2015_2026.csv";
+  link.click();
+  URL.revokeObjectURL(url);
+}
+</script>
+
+</body>
+</html>
